@@ -118,23 +118,10 @@ class LoginController extends Controller
         return redirect('/dashboard');
     }
 
+    public function adminLogout(){
+        auth('admin')->logout();
 
-//     public function logoutOtherDevices()
-// {
-//     // Get the currently authenticated user
-//     $user = Auth::user();
-
-//     // Check if the user is an admin
-//     if ($user->is_admin) {
-//         // Generate a new token for the user
-//         $user->forceFill([
-//             'api_token' => Str::random(60),
-//         ])->save();
-
-//         // Log the user out of all other devices
-//         Session::flush();
-//     }
-// }
-
+        return redirect('/');
+    }
     
 }

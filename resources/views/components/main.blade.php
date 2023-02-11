@@ -23,6 +23,8 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/date-1.1.1/datatables.min.css"/>
   
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.4/rg-1.1.4/datatables.min.css"/>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
  
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -103,19 +105,7 @@
       
       {{-- @if(auth('admin')->user()->is_admin == 1) --}}
       
-      <li>
-        <div class="iocn-link">
-          <a href="#">
-          <i class="bx bxs-data"></i>
-            <span class="link_name">Database</span>
-          </a>
-          <i class="bx bxs-chevron-down backupArrow" ></i>
-        </div>
-        <ul class="sub-menu">
-            <li><a class="link_name" href="#">Database</a></li>
-            <li><a href="{{url('/backup-database')}}">Backup Database</a></li>
-            <li><a href="{{url('/restore-database')}}">Restore Database</a></li>
-        </ul>
+      
         {{-- <li>
             <a href="audit-trail.php">
             <i class="bx bxs-file-find"></i>
@@ -143,16 +133,6 @@
             <li><a class="link_name" href="{{url('/admin-management')}}">Audit Trail</a></li>
           </ul>
       </li>
-        
-        {{-- <li>
-          <a href="{{url('/admin/applicant-accounts')}}">
-            <i class='bx bxs-user-circle'></i>
-            <span class="link_name">Applicant Accounts</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="home-page-edit.php">Web Page</a></li>
-          </ul>
-        </li> --}}
         <li>
           <a href="{{url('/admin/on-site-application')}}">
             <i class='bx bx-folder-plus'></i>
@@ -162,17 +142,20 @@
             <li><a class="link_name" href="/admin/on-site-application">On-site Application</a></li>
           </ul>
         </li>
-        {{-- <li>
-          <a href="{{url('/??')}}">
-            <i class='bx bx-edit-alt'></i>
-            <span class="link_name">Web Page Contents</span>
-          </a>
-          <ul class="sub-menu blank">
-            <li><a class="link_name" href="home-page-edit.php">Web Page</a></li>
+        <li>
+          <div class="iocn-link">
+            <a href="#">
+            <i class="bx bxs-data"></i>
+              <span class="link_name">Database</span>
+            </a>
+            <i class="bx bxs-chevron-down backupArrow" ></i>
+          </div>
+          <ul class="sub-menu">
+              <li><a class="link_name" href="#">Database</a></li>
+              <li><a href="{{url('/backup-database')}}">Backup Database</a></li>
+              <li><a href="{{url('/restore-database')}}">Restore Database</a></li>
           </ul>
-        </li> --}}
-      {{-- @endif --}}
- 
+        </li>
       <li>
     <div class="profile-details">
       <div class="profile-content">
@@ -193,7 +176,7 @@
      <a href="" class="adminLogout" >
           <i class='bx bx-log-out' id="log_out"></i>
         </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+        <form id="logout-form" action="{{ route('admin.logout') }}" method="GET" class="d-none">
           @csrf
       </form>
       </li>
@@ -281,28 +264,22 @@
 
 
 <script>
-  $(document).ready( function () {
-    
-    
-    $('#openedJobs').DataTable({
-      searching:false,
-        pagingType: 'full_numbers',
-    });
 
-    $("#openedJobsSearch").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#openedJobsSearchTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-  
-    
-    
-});
 $(document).ready(function () {
   $('.adminManagementTable').DataTable({
-    searching:false,
-        pagingType: 'full_numbers',
+    searching: true,
+      dom: 'lBfrtip<"actions">',
+        buttons: [
+                    {
+                      extend:'excel',
+                      className: 'btn ',
+                      text: window.excelButtonTrans,
+                        exportOptions: {
+                            columns: ['0','1','2','3','4','5','6','7'],
+                        }
+                    }, 
+                ],
+        
     });
     $("#adminSearch").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -332,6 +309,7 @@ $(document).ready(function () {
     $('.adminLogsTable').DataTable({
       searching:false,
         pagingType: 'full_numbers',
+        
     });
     $("#adminLogsSearch").on("keyup", function() {
     var value = $(this).val().toLowerCase();
@@ -608,12 +586,12 @@ return false;
 //         pagingType: 'full_numbers',
 //     });
 
-$("#closedJobsSearch").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#closedJobsSearchTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
+// $("#closedJobsSearch").on("keyup", function() {
+//     var value = $(this).val().toLowerCase();
+//     $("#closedJobsSearchTable tr").filter(function() {
+//       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+//     });
+//   });
 
 
 </script>

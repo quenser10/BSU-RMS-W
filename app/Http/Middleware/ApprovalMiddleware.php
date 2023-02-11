@@ -23,7 +23,7 @@ class ApprovalMiddleware
                 
                 auth()->guard('admin')->logout();
 
-                return redirect('/admin')->with('message', 'Your account needs to be verified and approved by the admin in charge.');
+                return redirect('/admin')->with('message', 'Your account needs to be verified, approved and activated by the admin in charge.');
             }
         }
         

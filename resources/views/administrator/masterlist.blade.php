@@ -10,18 +10,11 @@
 
                 <form action="" method="get">
                     <div class="row mb-4  justify-content-end" style="padding: 0%;">
-                    
-                        
                         <div class="col-md-2">
-                
-                            <input type="text" name="from_date" id="from_date" class="form-control" placeholder="From Date" value="{{old('from_date')}}"  readonly/>
-                            
+                            <input type="text" name="from_date" id="from_date" class="form-control" placeholder="From Date" value="{{old('from_date')}}"  readonly/>  
                         </div>
-                
                         <div class="col-md-2">
-                
                             <input type="text" name="to_date" id="to_date" class="form-control" placeholder="To Date" value="{{old('to_date')}}"  readonly/>
-                
                         </div>
     
                         <div class="col-md-2 m-0">

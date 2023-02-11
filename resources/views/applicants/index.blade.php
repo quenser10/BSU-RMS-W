@@ -66,7 +66,7 @@
 
             <!-- 1st Carousel -->
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid " src="{{url('/images/Home/testimg.jpg')}}" alt="">
+                <img class="img-fluid " src="{{url('/images/Home/BSU-HRMO Banner 3 without Text.png')}}" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(53, 53, 53, .7);">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -84,7 +84,7 @@
 
             <!-- 2nd Carousel -->
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="{{url('/images/Home/testimg.jpg')}}" alt="">
+                <img class="img-fluid" src="{{url('/images/Home/BSU-HRMO Banner 3 without Text.png')}}" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(53, 53, 53, .7);">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -102,7 +102,7 @@
 
             <!-- 3rd Carousel -->
             <div class="owl-carousel-item position-relative">
-                <img class="img-fluid" src="{{url('/images/Home/testimg.jpg')}}" alt="">
+                <img class="img-fluid" src="{{url('/images/Home/BSU-HRMO Banner 3 without Text.png')}}" alt="">
                 <div class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center" style="background: rgba(53, 53, 53, .7);">
                     <div class="container">
                         <div class="row justify-content-center">
@@ -129,7 +129,7 @@
                     <div class="service-item">
                         <div class="overflow-hidden border border-5 border-light  border-bottom-0">
                             <a href="http://www.bsu.edu.ph/bsu-transparency-seal">
-                                <img class="img-fluid" src="{{url('/images/Home/transparency-seal.jpg')}}" alt="">
+                                <img class="img-fluid" src="{{url('/images/Home/PHI-Tranparency Seal Logo.png')}}" alt="">
                             </a>
                         </div>
                     </div>
@@ -140,7 +140,7 @@
                         <div class="service-item">
                             <div class="overflow-hidden border border-5 border-light  border-bottom-0">
                                 <a href="http://www.bsu.edu.ph/dpa">
-                                    <img class="img-fluid" src="{{url('/images/Home/dpa_panel.jpg')}}" alt="">
+                                    <img class="img-fluid" src="{{url('/images/Home/BSU-Data Privacy.png')}}" alt="">
                                 </a>
                             </div>
                         </div>
@@ -151,7 +151,7 @@
                         <div class="service-item">
                             <div class="overflow-hidden border border-5 border-light  border-bottom-0">
                                 <a href="http://www.bsu.edu.ph/citizens-charter">
-                                    <img class="img-fluid" src="{{url('/images/Home/citizens-charter.jpg')}}" alt="">
+                                    <img class="img-fluid" src="{{url('/images/Home/BSU-Citizen_s Charter.png')}}" alt="">
                                 </a>
                             </div>
                         </div>
@@ -162,7 +162,7 @@
                         <div class="service-item">
                             <div class="overflow-hidden border border-5 border-light  border-bottom-0">
                                 <a href="https://www.foi.gov.ph/requests?agency=BSU">
-                                    <img class="img-fluid" src="{{url('/images/Home/foi_panel.jpg')}}" alt="">
+                                    <img class="img-fluid" src="{{url('/images/Home/PHI-Freedom of Information Logo.png')}}" alt="">
                                 </a>
                             </div>
                         </div>
