@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('middle_name')->nullable();
             $table->string('extension_name')->nullable();
             $table->string('sex');
-            $table->string('employee_id');
-            $table->string('email');
+            $table->string('employee_id')->unique();
+            $table->string('email')->unique();
             $table->string('office_designation');
             $table->string('password');
             $table->boolean('is_admin')->default(1);

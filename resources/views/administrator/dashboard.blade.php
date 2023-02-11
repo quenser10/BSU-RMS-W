@@ -25,7 +25,7 @@
       <div class="stat-card">
         <div class="stat-card__content">
           <p class="text-uppercase mb-1 text-muted">Jobs</p>
-          <h2><i class="fa fa-dollar"></i> {{$countJobs}}</h2>
+          <h2> {{$countJobs}}</h2>
           <div>
             
             <span class="text-muted">Opened</span>
@@ -51,6 +51,53 @@
         <div class="stat-card__icon stat-card__icon--warning">
           <div class="stat-card__icon-circle">
             <i class='bx bx-window-close' ></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {{-- No. of Qualified and Disqualified Applicants --}}
+  <div class="row mb-3">
+    <div class="card shadow" style="margin-bottom:10px;">
+      <div class="card-body">
+        <div class="card-title text-center">
+          <h4>Prequalification</h4>
+        </div>
+        <div class="row">
+          <form class="d-flex flex-row justify-content-center" id="qualificationfilter-form">
+            @csrf
+          <div class="col-md-3">
+            <select class="form-select" name="qualificationYearSelect" id="qualificationYearSelect" >
+              <option value="allYear" selected>All Years</option>
+              @foreach ($uniqueYears as $data)
+              <option value="{{$data}}">{{$data}}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="col-md-4 d-flex flex-row" style="margin-left: 10px;">
+            <input type="text" name="qualificationSearch" class="form-control" id="qualificationSearch" placeholder="Search Job Title">
+            <button type="submit" class="btn btn-primary" id="qualificationFilterBtn" style="margin-left: 10px">Filter</button>
+          </div>
+          </form>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6 text-center">
+            Number of Qualified Applicants
+          </div>
+          <div class="col-md-6 text-center">
+            Number of Disqualified Applicants
+          </div>
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-6 text-center">
+            <h2 id="qualifiedApplicantsTxt">
+              {{$qualifiedApplicants}}
+            </h2>
+          </div>
+          <div class="col-md-6 text-center">
+            <h2 id="disqualifiedApplicantsTxt">
+              {{$disqualifiedApplicants}}
+            </h2>
           </div>
         </div>
       </div>
@@ -126,7 +173,7 @@
             </table>
             <div class="mt-auto">
               <hr>
-              <a href="/job-management">View All</a>
+              <a href="/admin/job-management/opened-jobs">View All</a>
             </div>
           
           </div>
@@ -134,16 +181,47 @@
       </div>
     </div> <!--col-md-7-->               
   </div>
-  <div class="row">
-    <div class="card" style="margin-bottom:10px;">
+  
+  <div class="row mt-4">
+    <div class="card shadow" style="margin-bottom:10px;">
       <div class="card-body">
-        <canvas id="myChart" width="400" height="100"></canvas>
+        <h4 class="float-left">Number of Applicants</h4>
+        <div class="row d-flex  mt-4">
+          <form class="d-flex flex-row" id="year-form">
+            @csrf
+          <div class="col-md-2">
+
+              <select class="form-select" name="yearSelect" id="yearSelect" >
+                <option value="allYear" selected>All Years</option>
+                @foreach ($uniqueYears as $data)
+                <option value="{{$data}}">{{$data}}</option>
+                @endforeach
+              </select>
+            
+          </div>
+         
+            <div class="col-md-5 d-flex flex-row" style="margin-left: 10px;">
+                <input type="text" name="itemNumberSearch" class="form-control" id="itemNumberSearch" placeholder="Search Item Number" >
+                <button type="submit" class="btn btn-primary" id="itemNumberFilterBtn" style="margin-left: 10px">Filter</button>
+            </div>
+          </form>
+ 
+        </div>
+        <div class="row mt-2">
+          <canvas id="myChart" width="400" height="100"></canvas>
+        </div>
       </div>
     </div>
                   
   </div>
-  </div>
 </x-main>
+
+<script>
+ 
+  var _ydata = JSON.parse('{!! json_encode($months) !!}') ;
+  var _xdata = JSON.parse('{!! json_encode($monthCount) !!}'); 
+  
+</script>
 
 <script>
 
@@ -151,10 +229,10 @@
   const myChart = new Chart(ctx, {
       type: 'bar',
       data: {
-          labels: ['2020', '2021', '2022' ],
+          labels: _ydata,
           datasets: [{
               label: 'Number of Applicants',
-              data: [12, 39, 3],
+              data: _xdata,
               backgroundColor: [
                   'rgba(255, 99, 132, 0.2)',
                   'rgba(54, 162, 235, 0.2)',
@@ -182,5 +260,72 @@
           }
       }
   });
+
+  document.getElementById('yearSelect').addEventListener('change', function() {
+    // make an AJAX request to the server and pass the selected year as a parameter
+    $.ajax({
+      url: '/admin/year-filter',
+      type: 'GET',
+      data: { yearSelect: this.value },
+      success: function(response) {
+        // update the chart with the new data
+        myChart.data.datasets[0].data = response.monthCount;
+        myChart.data.labels = response.months;
+        myChart.update();
+      }
+    });
+  });
+
+// ITEM NUMBER SEARCH FILTER
+  document.getElementById('itemNumberFilterBtn').addEventListener('click', function(event) {
+    event.preventDefault(); 
+   
+    $.ajax({
+      url: '/admin/year-filter',
+      type: 'GET',
+      data: { itemNumberSearch: document.getElementById('itemNumberSearch').value , yearSelect: document.getElementById('yearSelect').value},
+      success: function(response) {
+        // update the chart with the new data
+        myChart.data.datasets[0].data = response.monthCount;
+        myChart.data.labels = response.months;
+        myChart.update();
+      }
+    });
+  });
+
+  document.getElementById('qualificationYearSelect').addEventListener('change', function() {
+    
+    $.ajax({
+      url: '/admin/qualification-filter',
+      type: 'GET',
+       data: {qualificationYearSelect: this.value },
+      success: function(response) {
+        console.log(response);
+        $('#qualifiedApplicantsTxt').html(response.qualifiedApplicants);
+        $('#disqualifiedApplicantsTxt').html(response.disqualifiedApplicants);
+        
+      }
+    });
+  });
+
+  document.getElementById('qualificationFilterBtn').addEventListener('click', function(event) {
+    event.preventDefault(); 
+   
+    $.ajax({
+      url: '/admin/qualification-filter',
+      type: 'GET',
+      data: { qualificationSearch: document.getElementById('qualificationSearch').value , qualificationYearSelect: document.getElementById('qualificationYearSelect').value},
+      success: function(response) {
+
+        $("#qualifiedApplicantsTxt").text(response.qualifiedApplicants);
+        $("#disqualifiedApplicantsTxt").text(response.disqualifiedApplicants);
+        
+      }
+    });
+  });
+
   
   </script>
+
+
+

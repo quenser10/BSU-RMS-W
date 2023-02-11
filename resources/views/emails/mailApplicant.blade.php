@@ -19,9 +19,12 @@ From,<br>
 </head>
 
 <body>
-    <h1>{{ $details['title'] }}</h1>
-    <p>{{ $details['body'] }}</p>
-    <p>Kind Regards, <br />Benguet State University - Human Resource Management Office</p>
+    <p>{{ $details["first"] }}</p>
+    <p>{{ $details["second"] }}</p>
+    <p>{{ $details["third"] }}</p>
+    <p>{{ $details["fourth"] }}</p>
+    
+    <p>Kind Regards, <br />BSU - Human Resource Management Office</p>
 </body>
 
 </html>

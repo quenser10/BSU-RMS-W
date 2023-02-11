@@ -113,9 +113,11 @@ Route::group(['middleware' => ['admin_user']], function() {
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
 
+Route::get('/admin/year-filter', [DashboardController::class, 'yearFilter']);
+
+Route::get('/admin/qualification-filter', [DashboardController::class, 'qualificationFilter']);
+
 Route::get('/admin/masterlist', [DashboardController::class, 'showMasterlist'])->name('admin.masterlist');
-
-
 
 Route::get('/admin/masterlist/applicant-profile/{id}', [DashboardController::class, 'applicantProfile']);
 
@@ -135,7 +137,9 @@ Route::post('/admin/admin-management/update/{id}', [DashboardController::class, 
 
 Route::delete('/admin/admin-management/delete/{id}', [DashboardController::class, 'deleteAdmin'])->name('admin.delete');
 
-Route::post('/admin/admin-management/add', [DashboardController::class, 'addAdmin']);
+Route::post('/admin/admin-management/add', [DashboardController::class, 'createAdmin']);
+
+Route::get('/admin/admin-management/add-admin', [DashboardController::class, 'addAdmin']);
 
 Route::get('/admin/job-management/open-a-job', [DashboardController::class, 'getOpenJob']);
 Route::get('/admin/job-management/opened-jobs', [DashboardController::class, 'getOpenedJobs']);
@@ -186,6 +190,8 @@ Route::post('/applicant-tracking/generate-form/{applicant_id}', [DashboardContro
 Route::get('/applicant-tracking/pdf/{applicant_id}', [DashboardController::class, 'pdf']);
 
 Route::post('/admin/prequalification-report', [ExcelController::class, 'prequalificationReport']);
+
+Route::post('/admin/preliminary-assessment-report', [ExcelController::class, 'preliminaryAssessmentReport']);
 
 
 Route::post('/admin/restore-database', [DashboardController::class, 'restoreDatabase']);

@@ -71,7 +71,7 @@
     @endif
 
     <div class="p-5">
-        <form action="/my-application/update/{{$userData->id}}" method="post" enctype="multipart/form-data">
+        <form action="/my-application/update/{{$userData->id}}" method="post"  enctype="multipart/form-data">
         @csrf
         <div class="row">
             <div class="col-md-10 mx-auto">
@@ -327,15 +327,16 @@
                                 </div> --}}
                             </div>
                             
-                            
-                        @endif
-                        <div class="row ">
-                            @if($job->to_close == 1)
+                            <div class="row ">
+                            @if( $job->to_close == 1 )
                             <p class="text-primary" style="text-align: center;">Job has been closed. Your application is now being processed.</p>
+                            
                             @else
                             <button type="submit" class="btn btn-primary mx-auto text-white" style="width:50%">Update My Application</button>
                             @endif
                         </div>
+                        @endif
+                        
 
                     </div>
                     

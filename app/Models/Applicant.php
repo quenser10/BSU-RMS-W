@@ -16,6 +16,9 @@ class Applicant extends Model implements Auditable
     public function applicantPrequalification(){
         return $this->hasOne(Prequalification::class);
     }
+    public function applicantPreliminary(){
+        return $this->hasOne(InitialAssessmentScore::class);
+    }
 
     public function user(){
         return $this->belongsTo(User::class);

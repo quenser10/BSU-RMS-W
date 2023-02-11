@@ -24,6 +24,7 @@
       <thead>
         <tr >
           <th class="text-center" style="font-weight: bold;">Opened Job Positions</th>
+          <th class="text-center" style="font-weight: bold;">Item Number</th>
           <th class="text-center" style="font-weight: bold;">Date of Job Opened</th>
           <th class="text-center" style="font-weight: bold;">Closing Date</th>
           <th class="text-center" style="font-weight: bold;">Created at</th>
@@ -36,6 +37,7 @@
           @if($job['to_close']==0)
             <tr>
                 <td>{{$job['job_title']}}</td>
+                <td>{{$job['item_number']}}</td>
                 <td>{{$job['opening_date']}}</td>
                 <td>{{$job['closing_date']}}</td>
                 <td>{{$job['created_at']}}</td>
@@ -77,4 +79,72 @@ Swal.fire({
   
     })
 });
+</script>
+
+<script>
+  $("document").ready(function () {
+
+    // $('#openedJobs').DataTable({
+    //   searching:false,
+    //     pagingType: 'full_numbers',
+    // });
+
+    $("#openedJobsSearch").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#openedJobsSearchTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+
+    $("#openedJobs").dataTable({
+      searching: false,
+      pagingType: 'full_numbers',
+      dom: 'lBfrtip<"actions">',
+        buttons: [
+                    // {
+                    //   extend:'copy',
+                    //   className: 'btn ',
+                    //   text: window.copyButtonTrans,
+                    //     exportOptions: {
+                    //         columns: ['0','1','2','3','4','5','6'],
+                    //     }
+                    // },
+                    {
+                      extend:'excel',
+                      className: 'btn ',
+                      text: window.excelButtonTrans,
+                        exportOptions: {
+                            columns: ['0','1','2','3','4'],
+                        }
+                    },
+                    // {
+                    //   extend:'csv',
+                    //   className: 'btn ',
+                    //   text: window.csvButtonTrans,
+                    //     exportOptions: {
+                    //         columns: ['0','1','2','3','4','5','6'],
+                    //     }
+                    // },
+                    // {
+                    //   extend:'pdf',
+                    //   className: 'btn ',
+                    //   text: window.pdfButtonTrans,
+                    //     exportOptions: {
+                    //         columns: ['0','1','2','3','4','5','6'],
+                    //     }
+                    // },
+                    // {
+                    //   extend:'print',
+                    //   className: 'btn ',
+                    //   text: window.printButtonTrans,
+                    //     exportOptions: {
+                    //         columns: ['0','1','2','3','4','5','6'],
+                    //     }
+                    // },
+                    
+                ],
+
+    });
+    
+  });
 </script>

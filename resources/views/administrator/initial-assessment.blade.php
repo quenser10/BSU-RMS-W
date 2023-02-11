@@ -37,7 +37,7 @@
                             <tr>
                                 <td>{{$applicant['first_name']}}</td>
                                 <td>{{$applicant['last_name']}}</td>
-                                <td>{{$applicant['email']}}</td>
+                                <td>{{$applicant['email']}}</td> 
                                 <td>{{$applicant['applying_for']}}</td>
                                 <td>{{$applicant['mobile_number']}}</td>
                                 <td class="text-info text-capitalize">{{$applicant['status']}}</td>

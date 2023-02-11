@@ -34,8 +34,11 @@ class JobController extends Controller
         // $path = '/home/a2as5axe56qw/public_html/storage/job_images';
         // $request->file('cover_image')->move($path, $request->file('job_image'));
 
-        if($request->hasFile('job_image')){
+
+        if($request->file('job_image') != null){
             $formFields['job_image'] = $request->file('job_image')->store('job_images', 'public');
+        }else{
+            $formFields['job_image'] = "";
         }
     
         OpenedJob::create($formFields);

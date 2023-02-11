@@ -28,9 +28,9 @@ class AdminAccountSeeder extends Seeder
 
                'sex'=>'Male',
 
-               'employee_id'=>'12345',
+               'employee_id'=>'123453',
 
-               'email'=>'hrmo.rsp@gmail.com',
+               'email'=>'h.rsp@gmail.com',
 
                'office_designation'=>'HRMO',
 

@@ -13,7 +13,7 @@
             <div class="modal-body">
                 
                 <div class="row">
-                    <p class="text-center">Choose job to generate report:</p>
+                    <p class="text-center">Choose Job Position to Generate Report:</p>
                 </div>
                 <div class="row mx-5">
                     <div class="col-md-12">
@@ -43,6 +43,7 @@
         </div>
       </div>
     </div>
+    
     {{-- MOdal --}}
     <div class="home-content">
         <div class="text">Applicant Tracking</div>
@@ -63,13 +64,15 @@
             <div class="col-md-12">
                 <div class="overflow-auto p-3 mb-3 mb-md-0 mr-md-3 bg-light shadow-lg" style="max-width: 95%; max-height: 800px;"> 
                     <div class="row mb-3">
-                        <div class="col-md-3">
-                            <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prequalificationReport">Pre-qualification Report</a>
-                        </div>
-                        <div class="col-md-3">
-                            <label for="" class="hidden"></label>
-                        </div>
                         <div class="col-md-6">
+                            <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#prequalificationReport">Pre-qualification Report</a>
+                            <a href="" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#preliminaryAssessmentReport">Preliminary Assessment Report</a>
+                        </div>
+                        <div class="col-md-2">
+                            {{-- <label for="" class="">Preliminary Assessment Report</label> --}}
+                            
+                        </div>
+                        <div class="col-md-4">
                             <input type="text" name="qualifiedSearch" class="form-control" id="qualifiedSearch" placeholder="Search Table..">
                        </div>
                     </div>
@@ -91,7 +94,7 @@
                                     <td>{{$applicant['last_name']}}</td>
                                     <td>{{$applicant['email']}}</td>
                                     <td>{{$applicant['applying_for']}}</td>   
-                                    <td>{{$applicant->applicantPrequalification->remarks}}</td>                                                                                               
+                                    <td>{{$applicant->applicantPrequalification->remarks??''}}</td>                                                                                               
                                 </tr>
                                 {{-- @endif --}}
                                 
@@ -124,7 +127,7 @@
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Applying for</th>
-                                <th>Reason for Disqualification </th>   
+                                {{-- <th>Reason for Disqualification </th>    --}}
                                 
                             </tr>
                         </thead>
@@ -136,7 +139,7 @@
                                     <td>{{$applicant->last_name}}</td>
                                     <td>{{$applicant->email}}</td>
                                     <td>{{$applicant->applying_for}}</td>
-                                    <td>{{$applicant->applicantPrequalification->reason_for_disqualification}}</td>
+                                    {{-- <td>{{$applicant->applicantPrequalification->reason_for_disqualification}}</td> --}}
                                                                                             
                                 </tr>
                                 {{-- @endif --}}
@@ -153,4 +156,47 @@
     </div>
    </div>
 </form>
+{{-- MODAL FOR PRELIMINARY ASSESSMENT REPORT --}}
+<div class="modal fade" id="preliminaryAssessmentReport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <form action="/admin/preliminary-assessment-report" method="POST" enctype="multipart/form-data">
+            @csrf
+        <div class="modal-header border-bottom-0 d-flex justify-content-center">
+          <h3 >Preliminary Assessment Report</h3>
+        </div>
+        <div class="modal-body">
+            
+            <div class="row">
+                <p class="text-center">Choose Job Position to Generate Report:</p>
+            </div>
+            <div class="row mx-5">
+                <div class="col-md-12">
+                    @foreach ($uniqueJobs as $job)
+                        <div class="form-check mx-5">
+                            <input class="form-check-input" type="radio" name="flexRadio"  value="{{$job}}">
+                            <label class="form-check-label text-capitalize" >
+                            {{$job}}
+                            </label>
+                        </div>
+                    @endforeach
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="modal-footer d-flex justify-content-center m-0">
+        
+            <div class="row">
+                    <div class="col-sm-3">
+                        <div>
+                            <button type="submit" name="action" class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        </form>
+    </div>
+  </div>
+</div>
 </x-main>
